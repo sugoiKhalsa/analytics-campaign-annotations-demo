@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VWO Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css?v=20250619-vwo-svg">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <div class="logo">
+                <svg class="vwo-logo-svg" width="61" height="20" viewBox="0 0 61 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50.6072 0C50.2351 0 49.7886 0 49.4165 0.0740741L47.2583 3.85185C48.2258 3.25926 49.4165 2.96296 50.6072 2.96296C54.4771 2.96296 57.6771 6.14815 57.6771 10C57.6771 13.8519 54.4771 17.037 50.6072 17.037C46.7374 17.037 43.6117 13.9259 43.5373 10.0741L41.3047 13.8519C42.7931 17.4815 46.4397 20 50.5328 20C56.0399 20 60.5795 15.4815 60.5795 10C60.6539 4.51852 56.1143 0 50.6072 0Z" fill="#BF3078"/>
+                    <path d="M20.2393 10.4444L21.9509 7.48148L25.8208 14.0741L30.286 6.44444L34.7512 14.0741L42.4165 1.11111C42.7886 0.444444 43.5328 0 44.3514 0H46.5096L34.7512 20L30.286 12.3704L25.8208 20L20.2393 10.4444Z" fill="#802050"/>
+                    <path d="M23.4423 0L11.684 20L0 0H2.15818C2.97681 0 3.72101 0.444444 4.09311 1.11111L11.684 14.1481L19.3492 1.11111C19.7213 0.444444 20.4655 0 21.2842 0H23.4423Z" fill="#26134D"/>
+                </svg>
+            </div>
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">Board</span>
+                <i class="fas fa-chevron-right"></i>
+                <span class="breadcrumb-item current">Untitled Report</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-info">
+                <span class="user-name">Randeep Singh</span>
+                <span class="user-id">#432345</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <button class="icon-btn" title="Need help?">
+                <i class="fas fa-question-circle"></i>
+                <span>Need help?</span>
+            </button>
+            <button class="icon-btn">
+                <i class="fas fa-chart-line"></i>
+            </button>
+            <button class="icon-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button class="icon-btn">
+                <i class="fas fa-user-circle"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-item active">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-copy"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Main Dashboard -->
+            <div class="dashboard-content">
+                <!-- Left Panel - Metrics and Report Controls -->
+                <div class="left-panel">
+                    <!-- Report Header -->
+                    <div class="report-header">
+                        <div class="report-title-section">
+                            <h1 class="report-title">Untitled Report</h1>
+                            <div class="title-actions">
+                                <button class="edit-btn">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="more-options">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="report-actions">
+                            <button class="save-btn">Save</button>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Metrics Panel -->
+                    <div class="metrics-panel">
+                        <div class="panel-tabs">
+                            <button class="tab-btn active">
+                                <i class="fas fa-lightbulb"></i>
+                                Insights
+                            </button>
+                            <button class="tab-btn">
+                                <i class="fas fa-filter"></i>
+                                Funnels
+                            </button>
+                            <button class="tab-btn">
+                                <i class="fas fa-route"></i>
+                                Journeys
+                            </button>
+                        </div>
+
+                        <!-- Metric A -->
+                        <div class="metric-item">
+                            <div class="metric-header">
+                                <span class="metric-label">A</span>
+                                <span class="metric-name">Page Visits</span>
+                                <button class="metric-edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="metric-filter">
+                                    <i class="fas fa-filter"></i>
+                                </button>
+                                <button class="metric-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                            <div class="metric-type">Total Events <i class="fas fa-chevron-down"></i></div>
+                            <div class="metric-filters">
+                                <div class="filter-item">
+                                    <span class="filter-label">where</span>
+                                    <span class="filter-field">Page URL</span>
+                                </div>
+                                <div class="filter-item">
+                                    <span class="filter-label">matches</span>
+                                    <span class="filter-value">https://vwo.com</span>
+                                </div>
+                                <div class="filter-item">
+                                    <span class="filter-label">and where</span>
+                                    <span class="filter-field">Location</span>
+                                </div>
+                                <div class="filter-item">
+                                    <span class="filter-operator">=</span>
+                                    <span class="filter-value">India, USA, Japan</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metric B -->
+                        <div class="metric-item">
+                            <div class="metric-header">
+                                <span class="metric-label orange">B</span>
+                                <span class="metric-name">Clicks on page</span>
+                                <button class="metric-edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="metric-filter">
+                                    <i class="fas fa-filter"></i>
+                                </button>
+                                <button class="metric-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                            <div class="metric-type">Unique Conversions <i class="fas fa-chevron-down"></i></div>
+                        </div>
+
+                        <button class="add-metric-btn">
+                            <i class="fas fa-plus"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Chart and Controls -->
+                <div class="right-panel">
+                    <!-- Date Range and View Controls -->
+                    <div class="date-and-view-controls">
+                        <div class="date-controls">
+                            <button class="date-btn">Today</button>
+                            <button class="date-btn">Yesterday</button>
+                            <button class="date-btn">7 days</button>
+                            <button class="date-btn">15 days</button>
+                            <button class="date-btn active">1 Jan 24 - 1 Dec 24 <i class="fas fa-calendar"></i></button>
+                        </div>
+                        <div class="view-controls">
+                            <button class="filter-btn">
+                                Segments <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <button class="filter-btn">
+                                Dimensions <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chart Controls -->
+                    <div class="chart-controls">
+                        <div class="controls-left">
+                            <div class="toggle-control">
+                                <label class="toggle">
+                                    <input type="checkbox" id="showCampaigns" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span>Show campaigns</span>
+                            </div>
+                            <button class="filter-btn">
+                                Campaign filter <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <button class="filter-btn">
+                                Compare <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-container">
+                                <button class="filter-btn dropdown-toggle" id="timePeriodDropdown">
+                                    Months <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" id="timePeriodMenu">
+                                    <div class="dropdown-item active" data-period="months">Months</div>
+                                    <div class="dropdown-item" data-period="weeks">Weeks</div>
+                                    <div class="dropdown-item" data-period="days">Days</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls-right">
+                            <div class="chart-type-selector">
+                                <button class="chart-type-btn active" data-type="line">
+                                    <i class="fas fa-chart-line"></i>
+                                    Line
+                                </button>
+                                <button class="chart-type-btn" data-type="bar">
+                                    <i class="fas fa-chart-bar"></i>
+                                    Column
+                                </button>
+                                <button class="chart-type-btn" data-type="area">
+                                    <i class="fas fa-chart-area"></i>
+                                    Area
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color blue"></span>
+                            <span>A. Page Visits</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color orange"></span>
+                            <span>B. Clicks on page</span>
+                        </div>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="chart-container">
+                        <div id="mainChart"></div>
+                    </div>
+
+                    <!-- Campaign Bars -->
+                    <div class="campaign-bars" id="campaignBars">
+                        <div class="campaign-section-container">
+                            <div class="campaigns-label">Campaigns</div>
+                            <div class="campaign-timeline" id="campaignTimeline">
+                                <!-- Campaign bars will be dynamically generated by JavaScript -->
+                            </div>
+                            <div class="campaign-legend">
+                                <div class="campaign-legend-item">
+                                    <span class="campaign-legend-color testing"></span>
+                                    <span class="campaign-legend-label">Testing</span>
+                                </div>
+                                <div class="campaign-legend-item">
+                                    <span class="campaign-legend-color personalise"></span>
+                                    <span class="campaign-legend-label">Personalise</span>
+                                </div>
+                                <div class="campaign-legend-item">
+                                    <span class="campaign-legend-color rollouts"></span>
+                                    <span class="campaign-legend-label">Rollouts</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Campaign Tooltip -->
+                        <div class="campaign-tooltip" id="campaignTooltip">
+                            <div class="campaign-tooltip-header">
+                                <span class="campaign-tooltip-type" id="tooltipType"></span>
+                                <span class="campaign-tooltip-status" id="tooltipStatus"></span>
+                            </div>
+                            <div class="campaign-tooltip-title" id="tooltipTitle"></div>
+                            <div class="campaign-tooltip-creator" id="tooltipCreator"></div>
+                            <div class="campaign-tooltip-section">
+                                <div class="campaign-tooltip-label">Duration</div>
+                                <div class="campaign-tooltip-value" id="tooltipDuration"></div>
+                            </div>
+                            <div class="campaign-tooltip-section">
+                                <div class="campaign-tooltip-label">Target</div>
+                                <div class="campaign-tooltip-value" id="tooltipTarget"></div>
+                            </div>
+                            <div class="campaign-tooltip-section">
+                                <div class="campaign-tooltip-label">Variations</div>
+                                <div class="campaign-tooltip-variations" id="tooltipVariations"></div>
+                            </div>
+                            <div class="campaign-tooltip-section" id="tooltipMetricsSection">
+                                <div class="campaign-tooltip-label">Tracked Metrics</div>
+                                <div class="campaign-tooltip-metrics" id="tooltipMetrics"></div>
+                            </div>
+                            <div class="campaign-tooltip-actions">
+                                <button class="campaign-tooltip-btn" id="tooltipFilter">Apply campaign filter</button>
+                                <button class="campaign-tooltip-btn" id="tooltipCompare">Compare pre vs post campaign</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div class="data-table-section">
+                        <div class="table-header">
+                            <div class="search-container">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Search" class="search-input">
+                            </div>
+                            <button class="table-layout-btn">Change table layout</button>
+                        </div>
+                        
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th class="sticky-col sticky-col-1">
+                                            <input type="checkbox" checked>
+                                            Metric <i class="fas fa-sort"></i>
+                                        </th>
+                                        <th class="sticky-col sticky-col-2">Average <i class="fas fa-sort"></i></th>
+                                        <th>27 Feb</th>
+                                        <th>27 Feb</th>
+                                        <th>27 Feb</th>
+                                        <th>27 Feb</th>
+                                        <th>27 Feb</th>
+                                        <th>27 Feb</th>
+                                        <th>27 Feb</th>
+                                        <th>27 Feb</th>
+                                        <th>28 Feb</th>
+                                        <th>1 Mar</th>
+                                        <th>2 Mar</th>
+                                        <th>3 Mar</th>
+                                        <th>4 Mar</th>
+                                        <th>5 Mar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="sticky-col sticky-col-1">
+                                            <input type="checkbox" checked>
+                                            <span class="metric-indicator blue"></span>
+                                            A. Page Visits
+                                        </td>
+                                        <td class="sticky-col sticky-col-2">656</td>
+                                        <td>656</td>
+                                        <td>656</td>
+                                        <td>656</td>
+                                        <td>656</td>
+                                        <td>656</td>
+                                        <td>656</td>
+                                        <td>656</td>
+                                        <td>672</td>
+                                        <td>689</td>
+                                        <td>701</td>
+                                        <td>725</td>
+                                        <td>738</td>
+                                        <td>742</td>
+                                        <td>756</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sticky-col sticky-col-1">
+                                            <input type="checkbox" checked>
+                                            <span class="metric-indicator orange"></span>
+                                            B. Clicks on page
+                                        </td>
+                                        <td class="sticky-col sticky-col-2">485</td>
+                                        <td>485</td>
+                                        <td>485</td>
+                                        <td>485</td>
+                                        <td>485</td>
+                                        <td>485</td>
+                                        <td>485</td>
+                                        <td>485</td>
+                                        <td>492</td>
+                                        <td>501</td>
+                                        <td>515</td>
+                                        <td>523</td>
+                                        <td>538</td>
+                                        <td>544</td>
+                                        <td>551</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js?v=20250619-chart-bounds-fix"></script>
+</body>
+</html> 
