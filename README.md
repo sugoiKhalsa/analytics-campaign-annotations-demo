@@ -1,134 +1,182 @@
 # VWO Analytics Dashboard
 
-A comprehensive analytics dashboard interface that replicates the VWO platform's reporting functionality. This dashboard provides an intuitive way to visualize website metrics, campaign performance, and visitor behavior data.
+A modern, interactive analytics dashboard for VWO (Visual Website Optimizer) featuring campaign tracking, metrics visualization, and real-time data analysis.
+
+![VWO Analytics Dashboard](https://img.shields.io/badge/VWO-Analytics%20Dashboard-6366f1?style=for-the-badge&logo=data:image/svg+xml;base64,...)
+
+## 🚀 Live Demo
+
+**[View Live Dashboard →](https://[username].github.io/vwo-analytics-dashboard/)**
+
+## ✨ Features
+
+### 📊 Interactive Data Visualization
+- **Multiple Chart Types**: Line, Column, and Area charts
+- **Dynamic Time Periods**: Switch between Months, Weeks, and Days
+- **Real-time Updates**: Synchronized chart and table data
+- **Responsive Design**: Optimized for all screen sizes
+
+### 🎯 Campaign Management
+- **Campaign Tracking**: Visual campaign bars with hover effects
+- **Smart Tooltips**: Detailed campaign information with metrics
+- **Campaign Types**: Testing, Personalise, and Rollouts
+- **Date Tooltips**: Start/end dates on campaign hover
+- **Metric Filtering**: Only show campaigns tracking active metrics
+
+### 📈 Advanced Analytics
+- **Sticky Table Columns**: Metric names and averages stay visible
+- **Horizontal Scrolling**: Navigate through extensive date ranges
+- **Search & Filter**: Find specific data points quickly
+- **Campaign Lines**: Dashed lines showing campaign duration on charts
+
+### 🎨 Modern UI/UX
+- **Official VWO Branding**: Authentic logo and color scheme
+- **Smooth Animations**: Enhanced user experience with transitions
+- **Dark/Light Elements**: Professional dashboard aesthetics
+- **Intuitive Navigation**: Easy-to-use controls and filters
+
+## 🛠️ Technical Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Charts**: Apache ECharts 5.4.3
+- **Icons**: Font Awesome 6.0.0
+- **Hosting**: GitHub Pages
+- **Development**: Python HTTP Server
+
+## 📁 Project Structure
+
+```
+vwo-analytics-dashboard/
+├── index.html          # Main dashboard page
+├── styles.css          # CSS styling and responsive design
+├── script.js           # JavaScript functionality and chart logic
+├── server.py           # Development server (Python)
+├── VWO Logo.svg        # Official VWO logo
+├── README.md           # Project documentation
+└── script_backup.js    # Backup of previous script version
+```
 
 ## 🚀 Quick Start
 
-### Run the Dashboard Locally
+### Option 1: View Online
+Simply visit the [live demo](https://[username].github.io/vwo-analytics-dashboard/) to use the dashboard immediately.
 
-1. **Start the server:**
+### Option 2: Local Development
+
+1. **Clone the repository**
    ```bash
-   python server.py
+   git clone https://github.com/[username]/vwo-analytics-dashboard.git
+   cd vwo-analytics-dashboard
    ```
 
-2. **The dashboard will automatically open in your browser at:**
+2. **Start local server**
+   ```bash
+   # Using Python 3
+   python3 server.py
+   
+   # Or using Python's built-in server
+   python3 -m http.server 8000
+   
+   # Or using Node.js (if installed)
+   npx serve .
    ```
-   http://localhost:8000
-   ```
 
-### Server Options
+3. **Open in browser**
+   Navigate to `http://localhost:8000` (or the port shown in terminal)
 
-```bash
-# Start on default port (8000)
-python server.py
+## 🎯 Usage Guide
 
-# Start on a custom port
-python server.py -p 3000
+### Dashboard Navigation
+1. **Metrics Panel** (Left): Configure tracked metrics and filters
+2. **Chart Area** (Center): Interactive visualizations with campaign overlays
+3. **Data Table** (Bottom): Detailed metrics with sticky columns
 
-# Start without auto-opening browser
-python server.py --no-browser
+### Chart Interactions
+- **Hover**: View data points and campaign information
+- **Chart Types**: Switch between Line, Column, and Area
+- **Time Periods**: Toggle between Months, Weeks, and Days
+- **Campaign Toggle**: Show/hide campaign visualization
 
-# Start on custom port without browser
-python server.py -p 8080 --no-browser
+### Campaign Features
+- **Campaign Bars**: Visual representation of campaign duration
+- **Hover Effects**: Dashed lines on chart + detailed tooltips
+- **Metric Tracking**: Only campaigns tracking active metrics are shown
+- **Date Information**: Start/end dates appear on campaign bar edges
 
-# Get help
-python server.py --help
+## 🔧 Customization
+
+### Adding New Metrics
+```javascript
+// In script.js - Add to availableMetrics object
+const availableMetrics = {
+    newMetric: {
+        name: "C. New Metric Name",
+        color: "#custom-color",
+        enabled: true
+    }
+};
 ```
 
-## 📁 Files Structure
-
+### Adding New Campaigns
+```javascript
+// In script.js - Add to campaignData array
+{
+    id: X,
+    name: "Campaign Name",
+    type: "testing", // or "personalise", "rollouts"
+    status: "Running",
+    trackedMetrics: ["pageVisits", "clicks"],
+    // ... other properties
+}
 ```
-├── index.html          # Main dashboard HTML
-├── styles.css          # All styling and layout
-├── script.js           # Interactive functionality
-├── server.py           # Local Python HTTP server
-└── README.md           # This file
-```
 
-## 🎯 Features
+### Styling Modifications
+Edit `styles.css` to customize:
+- Colors and branding
+- Layout and spacing
+- Animation effects
+- Responsive breakpoints
 
-### 📊 Analytics Dashboard
-- **Interactive Line Charts** - Visualize page visits and click data over time
-- **Campaign Correlation** - View campaign timelines alongside metrics
-- **Real-time Filtering** - Filter data by date ranges, locations, and URLs
-- **Custom Metrics** - Add and configure custom tracking events
+## 🌟 Key Features Explained
 
-### 🎛️ Interactive Controls
-- **Date Range Picker** - Today, Yesterday, 7 days, 15 days, custom ranges
-- **Campaign Toggle** - Show/hide campaign correlation bars
-- **Chart Type Selection** - Switch between different visualization types
-- **Live Search** - Real-time table filtering and search
+### Campaign-Metric Integration
+The dashboard intelligently shows only campaigns that track at least one active metric, ensuring relevant data visualization.
 
-### 📋 Data Management
-- **Metric Configuration** - Set up page visits, conversions, custom events
-- **Advanced Filtering** - URL patterns, geographic locations, user segments
-- **Export Functionality** - Download data in various formats
-- **Save Reports** - Persist dashboard configurations
+### Smart Tooltip Positioning
+Advanced positioning algorithm prevents tooltip overlap with campaign bars, ensuring optimal user experience.
 
-## 🎨 Design Features
+### Dynamic Data Synchronization
+Chart x-axis and table columns automatically sync when switching between time periods (months/weeks/days).
 
-- **Clean Interface** - Minimalistic VWO-style design
-- **Responsive Layout** - Works on desktop, tablet, and mobile
-- **Interactive Elements** - Hover effects, smooth animations
-- **Accessibility** - Keyboard navigation and screen reader support
+### Responsive Chart Bounds
+Column charts automatically adjust boundaries and spacing to prevent overflow issues.
 
-## 🛠️ Technology Stack
+## 🤝 Contributing
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Charts**: Chart.js for interactive visualizations
-- **Icons**: Font Awesome for UI icons
-- **Server**: Python 3 built-in HTTP server
-- **No Build Process** - Pure web technologies, runs anywhere
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 🔧 Development
+## 📄 License
 
-### Requirements
-- Python 3.6+ (for the local server)
-- Modern web browser (Chrome, Firefox, Safari, Edge)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Making Changes
-1. Edit the HTML, CSS, or JavaScript files
-2. Refresh your browser to see changes instantly
-3. The server will automatically serve updated files
+## 🙏 Acknowledgments
 
-### Server Features
-- **Auto-port Detection** - Finds available ports automatically
-- **CORS Headers** - Enables cross-origin requests
-- **Proper MIME Types** - Serves files with correct content types
-- **Clean Logging** - Formatted request logs with timestamps
+- **VWO**: For the inspiration and branding elements
+- **Apache ECharts**: For powerful charting capabilities
+- **Font Awesome**: For beautiful icons
+- **GitHub Pages**: For free hosting
 
-## 📱 Browser Compatibility
+## 📞 Support
 
-- ✅ Chrome 70+
-- ✅ Firefox 65+
-- ✅ Safari 12+
-- ✅ Edge 79+
-
-## 🎯 Use Cases
-
-- **Analytics Prototyping** - Test dashboard designs and interactions
-- **Demo Presentations** - Showcase analytics capabilities
-- **Educational Tool** - Learn web development and data visualization
-- **Template Base** - Starting point for custom analytics dashboards
-
-## 🚦 Getting Help
-
-If you encounter any issues:
-
-1. **Check the console** - Open browser dev tools for error messages
-2. **Verify files** - Ensure all files are in the same directory
-3. **Port conflicts** - Try a different port with `-p` flag
-4. **Python version** - Ensure you're using Python 3.6+
-
-## 🎉 Tips
-
-- **Keyboard Shortcuts**: 
-  - `Ctrl+S` (or `Cmd+S`) to save reports
-  - `Ctrl+N` (or `Cmd+N`) to add new metrics
-  - `Esc` to close modals
-- **Performance**: The dashboard loads quickly and runs smoothly
-- **Customization**: Easy to modify colors, layout, and functionality
+For questions or support, please:
+1. Check the [Issues](https://github.com/[username]/vwo-analytics-dashboard/issues) page
+2. Create a new issue if needed
+3. Contact the maintainer
 
 ---
 
-**Happy analyzing!** 📊✨ 
+**Made with ❤️ for the VWO community** 
