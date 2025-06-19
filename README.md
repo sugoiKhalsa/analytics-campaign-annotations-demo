@@ -6,7 +6,7 @@ A modern, interactive analytics dashboard for VWO (Visual Website Optimizer) fea
 
 ## 🚀 Live Demo
 
-**[View Live Dashboard →](https://[username].github.io/vwo-analytics-dashboard/)**
+**[View Live Dashboard →](https://sugoikhalsa.github.io/analytics-campaign-annotations-demo/)**
 
 ## ✨ Features
 
@@ -46,7 +46,7 @@ A modern, interactive analytics dashboard for VWO (Visual Website Optimizer) fea
 ## 📁 Project Structure
 
 ```
-vwo-analytics-dashboard/
+analytics-campaign-annotations-demo/
 ├── index.html          # Main dashboard page
 ├── styles.css          # CSS styling and responsive design
 ├── script.js           # JavaScript functionality and chart logic
@@ -59,14 +59,14 @@ vwo-analytics-dashboard/
 ## 🚀 Quick Start
 
 ### Option 1: View Online
-Simply visit the [live demo](https://[username].github.io/vwo-analytics-dashboard/) to use the dashboard immediately.
+Simply visit the [live demo](https://sugoikhalsa.github.io/analytics-campaign-annotations-demo/) to use the dashboard immediately.
 
 ### Option 2: Local Development
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/[username]/vwo-analytics-dashboard.git
-   cd vwo-analytics-dashboard
+   git clone https://github.com/sugoiKhalsa/analytics-campaign-annotations-demo.git
+   cd analytics-campaign-annotations-demo
    ```
 
 2. **Start local server**
@@ -173,7 +173,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For questions or support, please:
-1. Check the [Issues](https://github.com/[username]/vwo-analytics-dashboard/issues) page
+1. Check the [Issues](https://github.com/sugoiKhalsa/analytics-campaign-annotations-demo/issues) page
 2. Create a new issue if needed
 3. Contact the maintainer
 
