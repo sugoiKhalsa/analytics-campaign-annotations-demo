@@ -20,6 +20,13 @@ const chartData = {
 // Current time period setting
 let currentTimePeriod = 'months';
 
+// Campaign filter and breakdown state
+let currentCampaignFilters = {
+    types: ['testing', 'personalise', 'rollouts'],
+    statuses: ['running', 'paused', 'completed', 'scheduled']
+};
+let currentBreakdown = 'none';
+
 // Function to update data table based on current time period
 function updateDataTable() {
     const tableWrapper = document.querySelector('.table-wrapper');
@@ -1191,6 +1198,215 @@ function ensureChartSize() {
     chartInstance.resize();
 }
 
+// Campaign Filter Functions
+function initializeCampaignFilter() {
+    const filterDropdown = document.getElementById('campaignFilterDropdown');
+    const filterMenu = document.getElementById('campaignFilterMenu');
+    
+    if (!filterDropdown || !filterMenu) return;
+    
+    // Toggle dropdown
+    filterDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+        filterMenu.classList.toggle('show');
+    });
+    
+    // Handle checkbox changes
+    filterMenu.addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+            updateCampaignFilters();
+        }
+    });
+    
+    // Handle quick filter clicks
+    filterMenu.addEventListener('click', (e) => {
+        if (e.target.hasAttribute('data-filter')) {
+            const filter = e.target.getAttribute('data-filter');
+            applyQuickFilter(filter);
+        }
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', () => {
+        filterMenu.classList.remove('show');
+    });
+}
+
+function updateCampaignFilters() {
+    const typeCheckboxes = document.querySelectorAll('#campaignFilterMenu input[value="testing"], #campaignFilterMenu input[value="personalise"], #campaignFilterMenu input[value="rollouts"]');
+    const statusCheckboxes = document.querySelectorAll('#campaignFilterMenu input[value="running"], #campaignFilterMenu input[value="paused"], #campaignFilterMenu input[value="completed"], #campaignFilterMenu input[value="scheduled"]');
+    
+    currentCampaignFilters.types = Array.from(typeCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value);
+    
+    currentCampaignFilters.statuses = Array.from(statusCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value);
+    
+    // Update filter button indicator
+    updateFilterIndicator();
+    
+    // Re-render campaign bars with new filters
+    renderCampaignBars();
+}
+
+function applyQuickFilter(filter) {
+    const typeCheckboxes = document.querySelectorAll('#campaignFilterMenu input[value="testing"], #campaignFilterMenu input[value="personalise"], #campaignFilterMenu input[value="rollouts"]');
+    const statusCheckboxes = document.querySelectorAll('#campaignFilterMenu input[value="running"], #campaignFilterMenu input[value="paused"], #campaignFilterMenu input[value="completed"], #campaignFilterMenu input[value="scheduled"]');
+    
+    switch(filter) {
+        case 'active':
+            statusCheckboxes.forEach(cb => {
+                cb.checked = cb.value === 'running';
+            });
+            break;
+        case 'this-month':
+            typeCheckboxes.forEach(cb => cb.checked = true);
+            statusCheckboxes.forEach(cb => {
+                cb.checked = cb.value === 'running' || cb.value === 'scheduled';
+            });
+            break;
+        case 'clear':
+            typeCheckboxes.forEach(cb => cb.checked = true);
+            statusCheckboxes.forEach(cb => cb.checked = true);
+            break;
+    }
+    
+    updateCampaignFilters();
+}
+
+function updateFilterIndicator() {
+    const filterBtn = document.getElementById('campaignFilterDropdown');
+    const totalTypes = 3;
+    const totalStatuses = 4;
+    const activeFilters = (totalTypes - currentCampaignFilters.types.length) + (totalStatuses - currentCampaignFilters.statuses.length);
+    
+    if (activeFilters > 0) {
+        filterBtn.classList.add('has-active-filters');
+        filterBtn.setAttribute('data-filter-count', activeFilters);
+    } else {
+        filterBtn.classList.remove('has-active-filters');
+        filterBtn.removeAttribute('data-filter-count');
+    }
+}
+
+// Breakdown Functions
+function initializeBreakdown() {
+    const breakdownDropdown = document.getElementById('breakdownDropdown');
+    const breakdownMenu = document.getElementById('breakdownMenu');
+    
+    if (!breakdownDropdown || !breakdownMenu) return;
+    
+    // Toggle dropdown
+    breakdownDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+        breakdownMenu.classList.toggle('show');
+    });
+    
+    // Handle breakdown selection
+    breakdownMenu.addEventListener('click', (e) => {
+        if (e.target.hasAttribute('data-breakdown')) {
+            const breakdown = e.target.getAttribute('data-breakdown');
+            setBreakdown(breakdown);
+        }
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', () => {
+        breakdownMenu.classList.remove('show');
+    });
+}
+
+function setBreakdown(breakdown) {
+    currentBreakdown = breakdown;
+    
+    // Update active state in dropdown
+    const items = document.querySelectorAll('#breakdownMenu .dropdown-item');
+    items.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('data-breakdown') === breakdown);
+    });
+    
+    // Update button text
+    const breakdownBtn = document.getElementById('breakdownDropdown');
+    const selectedItem = document.querySelector(`#breakdownMenu .dropdown-item[data-breakdown="${breakdown}"]`);
+    if (selectedItem && breakdownBtn) {
+        const text = selectedItem.textContent.trim();
+        breakdownBtn.innerHTML = `<i class="fas fa-layer-group"></i> ${text} <i class="fas fa-chevron-down"></i>`;
+    }
+    
+    // Apply breakdown to chart and data
+    applyBreakdown();
+    
+    // Close dropdown
+    document.getElementById('breakdownMenu').classList.remove('show');
+}
+
+function applyBreakdown() {
+    const legend = document.querySelector('.chart-legend');
+    if (!legend) return;
+    
+    switch(currentBreakdown) {
+        case 'none':
+            legend.innerHTML = `
+                <div class="legend-item">
+                    <span class="legend-color blue"></span>
+                    <span>A. Page Visits</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color orange"></span>
+                    <span>B. Clicks on page</span>
+                </div>
+            `;
+            break;
+        case 'campaign-type':
+            legend.innerHTML = `
+                <div class="legend-item">
+                    <span class="legend-color blue"></span>
+                    <span>Page Visits (Testing)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #6366f1;"></span>
+                    <span>Page Visits (Personalise)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #8b5cf6;"></span>
+                    <span>Page Visits (Rollouts)</span>
+                </div>
+            `;
+            break;
+        case 'campaign-variations':
+            legend.innerHTML = `
+                <div class="legend-item">
+                    <span class="legend-color blue"></span>
+                    <span>Control Groups</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #06b6d4;"></span>
+                    <span>Variation A</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #8b5cf6;"></span>
+                    <span>Variation B</span>
+                </div>
+            `;
+            break;
+    }
+}
+
+// Update getVisibleCampaigns to respect filters
+function getFilteredCampaigns() {
+    return campaignData.filter(campaign => {
+        const hasTrackedMetrics = getDisplayableMetrics(campaign).length > 0;
+        if (!hasTrackedMetrics) return false;
+        
+        if (!currentCampaignFilters.types.includes(campaign.type)) return false;
+        if (!currentCampaignFilters.statuses.includes(campaign.status.toLowerCase())) return false;
+        
+        return true;
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, starting initialization...'); // Debug log
@@ -1213,6 +1429,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeSearchFunctionality();
     initializeHoverEffects();
     initializeTimePeriodDropdown();
+    initializeCampaignFilter();
+    initializeBreakdown();
     
     // Initialize main action buttons
     initializeActionButtons();
@@ -1421,7 +1639,7 @@ function renderCampaignBars() {
     timeline.innerHTML = '';
     
     // Get only campaigns that have at least one tracked metric that's available in dashboard
-    const visibleCampaigns = getVisibleCampaigns();
+    const visibleCampaigns = getFilteredCampaigns();
     console.log('📊 Visible campaigns (with tracked metrics):', visibleCampaigns.map(c => c.name));
     
     if (visibleCampaigns.length === 0) {

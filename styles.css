@@ -681,6 +681,157 @@ body {
     font-size: 14px;
 }
 
+/* Campaign Analysis Controls */
+.campaign-analysis-group {
+    display: flex;
+    gap: 8px;
+    margin-left: 16px;
+    padding-left: 16px;
+    border-left: 1px solid #e2e8f0;
+}
+
+.campaign-filter-btn,
+.breakdown-btn {
+    position: relative;
+    font-weight: 500;
+}
+
+.campaign-filter-btn i.fas.fa-bullseye {
+    color: #3b82f6;
+    margin-right: 4px;
+}
+
+.breakdown-btn i.fas.fa-layer-group {
+    color: #8b5cf6;
+    margin-right: 4px;
+}
+
+/* Active state indicators */
+.filter-btn.has-active-filters::after {
+    content: attr(data-filter-count);
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+/* Campaign Filter Menu Styles */
+.campaign-filter-menu,
+.breakdown-menu {
+    min-width: 280px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.dropdown-section {
+    padding: 8px 0;
+}
+
+.dropdown-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    margin-bottom: 4px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 8px 0;
+}
+
+.dropdown-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    font-size: 13px;
+}
+
+.dropdown-checkbox:hover {
+    background: #f1f5f9;
+}
+
+.dropdown-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #d1d5db;
+    border-radius: 3px;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.dropdown-checkbox input[type="checkbox"]:checked + .checkmark {
+    background: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.dropdown-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.campaign-type-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+.campaign-type-indicator.testing {
+    background: #3b82f6;
+}
+
+.campaign-type-indicator.personalise {
+    background: #10b981;
+}
+
+.campaign-type-indicator.rollouts {
+    background: #f59e0b;
+}
+
+/* Breakdown Menu Styles */
+.breakdown-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breakdown-menu .dropdown-item i {
+    width: 16px;
+    color: #6b7280;
+}
+
+.breakdown-menu .dropdown-item.active i {
+    color: #3b82f6;
+}
+
 /* Chart Section */
 .chart-legend {
     padding: 16px 24px;
